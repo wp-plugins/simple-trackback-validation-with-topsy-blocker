@@ -8,6 +8,12 @@ Stable tag: 0.4
 
 REPLACEMENT of the original Simple Trackback Validation Plugin from Miachel. Performs a simple but very effective test on all incoming trackbacks in order to stop trackback spam. Now with topsy.com blocker.
 
+== Changelog ==
+
+= 0.4 =
+* Added installation guide
+
+
 == Description ==
 
 Simple Trackback Validation Plugin performs a simple but very effective test on all incoming trackbacks in order to stop trackback spam. Now with topsy.com blocker.
@@ -26,9 +32,15 @@ There are several options available and you also can enable logging to get all a
 
 Please visit [the official website](http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/ "Simple Trackback Validation with Topsy Blocker") for further details and the latest information on this plugin.
 
+
 == Installation ==
 
-See on [the official website](http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/ "Simple Trackback Validation with Topsy Blocker").
+1. Deactivate the original plugin "Simple Trackback Validation" if installed previously (this new plugin is a REPLACEMENT of the original one!)
+2. Upload this new plugin
+3. Activate this plugin
+4. Configure it via admin interface
+5. Ready to go!
+
 
 == Frequently Asked Questions ==
 
