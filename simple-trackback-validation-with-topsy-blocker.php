@@ -3,17 +3,15 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 0.4
+Version: 0.5
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
- 	    ___________________________________________________________
-       |                                                           |
-       |        Simple Trackback Validation with Topsy Blocker     |
-       |                © Tobias Koelligan 					       |
-	   |				© Michael Woehrer                          |
-       |___________________________________________________________|
-
-	© Copyright 2006-2007 Michael Woehrer (michael dot woehrer at gmail dot com)
+ 	    __________________________________________________________
+	   |			                                                        					|
+	   |        	Simple Trackback Validation with Topsy Blocker    			|
+	   |               	© Tobias Koelligan and					   			|
+	   |		© Michael Woehrer                          						|
+	   |_________________________________________________________ |
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,12 +23,8 @@ Author URI: http://www.sjmp.de
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-	----------------------------------------------------------------------------
-	INSTALLATION, USAGE:
-	Visit the plugin's homepage.
-	--------------------------------------------------------------------------*/
-
-
+*/
+	
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin options etc.
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,9 +73,9 @@ function stbv_main($incomingTB) {
 	global $stbv_opt, $stbv_val;
 
 	####################################
-	# We only deal with trackbacks
+	# We only deal with trackbacks/pingbacks
 	####################################
-	if ( $incomingTB['comment_type'] != 'trackback' ) return $incomingTB;
+	if ( $incomingTB['comment_type'] != 'trackback' && $incomingTB['comment_type'] != 'pingback' ) return $incomingTB;
 
 	####################################	
 	# Get trackback information
