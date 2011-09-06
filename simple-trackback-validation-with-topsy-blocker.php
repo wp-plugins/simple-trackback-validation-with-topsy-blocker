@@ -3,7 +3,7 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 0.7
+Version: 1.0
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
@@ -364,7 +364,7 @@ function stbv_adminOptions() {
 		<!-- *********************** BEGIN: Main Content ******************* -->
 
 		<?php if (stbv_isOldWordpress()) echo '<p style="color: red; font-weight: bold">You are using an outdated Wordpress version which is not supported by this plugin. Get the latest version at <a href="http://wordpress.org/download/">wordpress.org</a>.</p>'; ?>
-		<form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?page=' . basename(__FILE__); ?>&updated=true">
+		<form name="form1" method="post" action="<?php echo '?page=' . basename(__FILE__); ?>&updated=true">
 		<fieldset class="options">
 			<h3>How to deal with spam trackbacks?</h3>
 				<p style="float:right;" class="submit"><input type="submit" name="submit" value="<?php _e('Update Options &raquo;') ?>" /></p>
