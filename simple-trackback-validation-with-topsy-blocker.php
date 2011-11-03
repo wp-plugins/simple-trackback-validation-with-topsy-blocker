@@ -3,7 +3,7 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 1.0
+Version: 1.1
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
