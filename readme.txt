@@ -3,7 +3,7 @@ Contributors: Tobias Koelligan
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3736248
 Tags: trackback, validation, spam, anti-spam, protection, topsy, blocker, block
 Requires at least: 2.9
-Tested up to: 3.2.1
+Tested up to: 3.3
 Stable tag: 1.1
 
 REPLACEMENT of the original Simple Trackback Validation Plugin from Miachel. Performs a simple but very effective test on all incoming trackbacks in order to stop trackback spam. Now with topsy.com blocker.
