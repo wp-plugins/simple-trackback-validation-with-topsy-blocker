@@ -3,7 +3,7 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 1.1.1
+Version: 1.1.2
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
@@ -131,8 +131,13 @@ function stbv_main($incomingTB) {
 	# Phase 1 (IP) -  Verify IP address
 	####################################
 	if (!$stbv_val['is_spam'] && ($stbv_opt['stbv_validateIP'] == '1') ) {
-		$tmpSender_IP = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
-
+		// old simple check: $tmpSender_IP = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
+		// new ip check with proxy check:
+		$temp_ip = explode(',', isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : 
+										(isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : $_SERVER['REMOTE_ADDR']));
+		$remote_addr = trim($temp_ip[0]);
+		$tmpSender_IP = preg_replace('/[^0-9.]/', '', $remote_addr );
+		
 		$authDomainname = stbv_get_domainname_from_uri($stbv_val['comment_author_url']);
 		$tmpURL_IP = preg_replace('/[^0-9.]/', '', gethostbyname($authDomainname) );
 
