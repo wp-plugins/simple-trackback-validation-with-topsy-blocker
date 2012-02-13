@@ -3,7 +3,7 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 1.1.2
+Version: 1.1.3
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
@@ -159,7 +159,7 @@ function stbv_main($incomingTB) {
 
 		# Loading snoopy and create snoopy object. In case of
 		# failure it is being considered as spam, just in case.
-		if (!$stbv_val['is_spam'] && !stbv_loadSnoopy() ) {
+		if (!stbv_loadSnoopy() && !$stbv_val['is_spam']) {
 			// Loading snoopy failed
 			$stbv_val['log_info'][]['warning'] = 'Loading PHP Snoopy class failed. Phase 2 skipped.';
 			$stbv_val['snoopy_problem'] = true;
