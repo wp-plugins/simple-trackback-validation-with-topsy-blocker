@@ -3,7 +3,7 @@
 Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
-Version: 1.1.3
+Version: 1.1.4
 Author: Tobias Koelligan
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
@@ -104,7 +104,7 @@ function stbv_main($incomingTB) {
 	$stbv_val['is_spam'] = false;
 
 	####################################
-	# If a Snoopy problem occurrs (Snoopy can't be loaded or a snoopy error
+	# If a WP_HTTP problem occurrs (WP_HTTP can't be loaded or a WP_HTTP error
 	# occurred), this variable will be set to TRUE
 	####################################
 	$stbv_val['snoopy_problem'] = false;
@@ -153,28 +153,32 @@ function stbv_main($incomingTB) {
 	}
 
 	####################################
-	# Phase 2 (URL) -  Snoopy
+	# Phase 2 (URL) -  WP_HTTP
 	####################################
  	if ( $stbv_opt['stbv_validateURL'] == '1' ) {
 
-		# Loading snoopy and create snoopy object. In case of
+		# Loading WP_HTTP and create WP_HTTP object. In case of
 		# failure it is being considered as spam, just in case.
-		if (!stbv_loadSnoopy() && !$stbv_val['is_spam']) {
-			// Loading snoopy failed
-			$stbv_val['log_info'][]['warning'] = 'Loading PHP Snoopy class failed. Phase 2 skipped.';
+		if (!stbv_load_WP_HTTP() && !$stbv_val['is_spam']) {
+			// Loading WP_HTTP failed
+			$stbv_val['log_info'][]['warning'] = 'Loading PHP WP_HTTP class failed. Phase 2 skipped.';
 			$stbv_val['snoopy_problem'] = true;
 		} else { 
-			// Create new Snoopy object
-			$stbvSnoopy = new Snoopy;
+			// Create new WP_HTTP object
+			$stbvSnoopy = new WP_Http;
 		}
 	
 		# Fetch all URLs of the author's web page
-		if (!$stbv_val['is_spam'] && !$stbv_val['snoopy_problem'] && ! @$stbvSnoopy->fetchlinks($stbv_val['comment_author_url']) ) {
-				// Snoopy couldn't couldn't reach the target website, Snoopy error occurred, or something else...
-				$stbv_val['log_info'][]['warning'] = 'Snoopy couldn\t find something on the source website or Snoopy error occurred. Phase 2 skipped.';
+		if (!$stbv_val['is_spam'] && !$stbv_val['snoopy_problem'] && !@$stbvSnoopy->request($stbv_val['comment_author_url'])) {
+				// WP_HTTP couldn't couldn't reach the target website, WP_HTTP error occurred, or something else...
+				$stbv_val['log_info'][]['warning'] = 'WP_HTTP couldn\t find something on the source website or WP_HTTP error occurred. Phase 2 skipped.';
 				$stbv_val['snoopy_problem'] = true;
 		} else {
-			$stbvAuthorUrlArray = $stbvSnoopy->results;
+			$stbvFetchedSiteContent = $stbvSnoopy->body;
+			$stbvAuthorUrlArray = array();
+			if (preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $stbvFetchedSiteContent, $stbvFetchedSiteContentMatch) !== FALSE) {
+				$stbvAuthorUrlArray = $stbvFetchedSiteContentMatch[0];
+			}
 		}
 	
 		# Check if URL array contains link to website
@@ -262,13 +266,12 @@ function stbv_main($incomingTB) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Load the Snoopy class.
+// Load the WP_HTTP class.
 // Returns TRUE if class is successfully loaded, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-function stbv_loadSnoopy() {
-	if ( !class_exists('Snoopy') ) {
-
-		if (@include_once( ABSPATH . WPINC . '/class-snoopy.php' )) {
+function stbv_load_WP_HTTP() {
+	if ( !class_exists('WP_Http') ) {
+		if (@include_once( ABSPATH . WPINC . '/class-http.php' )) {
 			return true;
 		} else {
 			return false;
