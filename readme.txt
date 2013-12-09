@@ -10,6 +10,9 @@ REPLACEMENT of the original Simple Trackback Validation Plugin from Miachel. Per
 
 == Changelog ==
 
+= 1.1.8 =
+* Fixed deprecated code
+
 = 1.1.7 =
 * Tested with 3.7.1
 
