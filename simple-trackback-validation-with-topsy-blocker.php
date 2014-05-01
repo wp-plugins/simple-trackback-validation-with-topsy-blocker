@@ -4,7 +4,7 @@ Plugin Name: Simple Trackback Validation with Topsy Blocker
 Plugin URI: http://www.sjmp.de/blogging/simple-trackback-validation-with-topsy-blocker/
 Description: Enhancement and REPLACEMENT of the original STV plugin from Michael Woehrer. Added automated blocking of topsy.com Trackbacks.
 Author: Tobias Koelligan
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://www.sjmp.de
  	    __________________________________________________________
 	   |			                                                        					|
@@ -302,7 +302,7 @@ function stbv_adminOptions() {
 
 	global $stbv_opt;
 
-	add_option('plugin_simple_tb_validation2', $stbv_opt, 'Simple Trackback Validation Plugin Options');
+	add_option('plugin_simple_tb_validation2', $stbv_opt, '', 'yes');
 
 	/* Check form submission and update options if no error occurred */
 	if (isset($_POST['submit']) ) {
@@ -546,7 +546,7 @@ function stbv_txtLineBreakToWhiteSpace($input) {
 		if ($loopval <> '') {
 
 			// Clean URL (it's a Wordpress function)
-			$loopval = clean_url($loopval);
+			$loopval = esc_url($loopval);
 			
 			// Create separator
 			$sep = ''; 
@@ -611,7 +611,7 @@ function stbv_log_addentry($logmsg) {
 		$log[] = $logentry_arr;
 		update_option('plugin_simple_tb_validation2_log', $log);
 	} else {
-		add_option('plugin_simple_tb_validation2_log', 'empty', 'Simple Trackback Validation Plugin: Log', 'no');
+		add_option('plugin_simple_tb_validation2_log', 'empty', '', 'no');
 	}
 
 }
