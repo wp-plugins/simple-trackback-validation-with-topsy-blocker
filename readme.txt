@@ -3,12 +3,15 @@ Contributors: Tobias Koelligan
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3736248
 Tags: trackback, validation, spam, anti-spam, protection, topsy, blocker, block
 Requires at least: 3.2
-Tested up to: 4.0
-Stable tag: 1.2.3
+Tested up to: 4.1
+Stable tag: 1.2.4
 
 REPLACEMENT of the original Simple Trackback Validation Plugin from Miachel. Performs a simple but very effective test on all incoming trackbacks in order to stop trackback spam. Now with topsy.com blocker.
 
 == Changelog ==
+
+= 1.2.4 =
+* check for WP 4.1
 
 = 1.2.3 =
 * check for WP 4.0
